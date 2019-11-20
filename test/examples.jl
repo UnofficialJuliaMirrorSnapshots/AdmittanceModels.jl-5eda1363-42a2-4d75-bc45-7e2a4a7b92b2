@@ -58,7 +58,7 @@ module PSOModelExample
     PORT_1 = "port_1"
     ports = [PORT_0, PORT_1]
     P = 1.0 * sparse([[1, 0, 0, 0] [0, 0, 1, 0]])
-    pso = PSOModel(K, G, C, P, P, ports)
+    pso = PSOModel(K, G, C, P, ports)
 end
 
 module LRCExample
@@ -85,7 +85,7 @@ module HalfWaveExample
     capacitors = [SeriesComponent("coupler_$i", "qubit_$i", 0, 0, coupling_cs[i]) for i in 1:2]
     qubit_cs = [100, 120] * 1e-15
     qubits = [ParallelComponent("qubit_$i", 0, 0, qubit_cs[i]) for i in 1:2]
-    pso = cascade_and_unite(PSOModel.([resonator; capacitors; qubits]))
+    pso = connect(PSOModel.([resonator; capacitors; qubits]))
     pso = short_ports(pso, ["short_1", "short_2"])
     pso = open_ports_except(pso, ["qubit_1", "qubit_2"])
 end
